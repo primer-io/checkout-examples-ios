@@ -1,0 +1,137 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "App.Title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Co-Badged Cards Example App"
+          }
+        }
+      }
+    },
+    "Dismiss" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dismiss"
+          }
+        }
+      }
+    },
+    "or" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "or"
+          }
+        }
+      }
+    },
+    "PaymentResult.Result.FailureTitle" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Payment Failed"
+          }
+        }
+      }
+    },
+    "PaymentResult.Result.SuccessTitle" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Payment Succeeded"
+          }
+        }
+      }
+    },
+    "Settings.Button.FetchClientToken" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fetch client token"
+          }
+        }
+      }
+    },
+    "Settings.Button.RefetchClientToken" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Refetch client token"
+          }
+        }
+      }
+    },
+    "Settings.ClientToken.Placeholder" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Client Token"
+          }
+        }
+      }
+    },
+    "Settings.ClientToken.Title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Client Token"
+          }
+        }
+      }
+    },
+    "Settings.ClientTokenUrl.Placeholder" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Client Token URL"
+          }
+        }
+      }
+    },
+    "Start.Button.MakePayment" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Make a payment"
+          }
+        }
+      }
+    },
+    "Start.Text.About" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "To make a co-badged card payment you need to either provide a client token below, or provide a URL to a server that returns a client token. See our documentation to find out more about setting up a simple mock server. "
+          }
+        }
+      }
+    },
+    "Start.Text.Title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configure the example app"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}
