@@ -67,7 +67,9 @@ struct StartPage: View {
             settingsModel.fetchErrorMessage = nil
 
             do {
-                settingsModel.clientToken = try await service.fetchClientToken(from: settingsModel.clientTokenUrl)
+                if !settingsModel.isClientTokenValid {
+                    settingsModel.clientToken = try await service.fetchClientToken(from: settingsModel.clientTokenUrl)
+                }
                 try await service.start()
                 await service.configureForPayments()
                 sdkState = .ready
