@@ -36,7 +36,8 @@ platform :ios do
       xcargs: "EXCLUDED_ARCHS[sdk=iphonesimulator*]=arm64",
       export_method: "development",
       skip_package_ipa: true,
-      skip_package_pkg: true
+      skip_package_pkg: true,
+      skip_profile_detection: true
     )
   end
 end
