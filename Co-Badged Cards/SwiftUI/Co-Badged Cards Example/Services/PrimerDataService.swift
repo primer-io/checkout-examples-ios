@@ -179,14 +179,24 @@ extension PrimerDataService: PrimerHeadlessUniversalCheckoutRawDataManagerDelega
     }
     
     func primerRawDataManager(_ rawDataManager: PrimerHeadlessUniversalCheckout.RawDataManager,
-                              willFetchCardMetadataForState cardState: PrimerCardNumberEntryState) {
-        logger.info("willFetchCardMetadataForState: \(cardState.cardNumber)")
+                              willFetchMetadataForState cardState: PrimerValidationState) {
+        guard let state = cardState as? PrimerCardNumberEntryState else {
+            logger.error("Received non-card metadata. Ignoring ...")
+            return
+        }
+        logger.info("willFetchCardMetadataForState: \(state.cardNumber)")
         currentModels = nil
     }
     
+    
     func primerRawDataManager(_ rawDataManager: PrimerHeadlessUniversalCheckout.RawDataManager,
-                              didReceiveCardMetadata metadata: PrimerCardNumberEntryMetadata,
-                              forCardState cardState: PrimerCardNumberEntryState) {
+                              didReceiveMetadata metadata: PrimerPaymentMethodMetadata,
+                              forState cardState: PrimerValidationState) {
+        guard let metadata = metadata as? PrimerCardNumberEntryMetadata,
+        let cardState = cardState as? PrimerCardNumberEntryState else {
+            logger.error("Received non-card metadata. Ignoring ...")
+            return
+        }
         let metadataDescription = metadata.availableCardNetworks.map { $0.displayName }.joined(separator: ", ")
         logger.info("didReceiveCardMetadata: \(metadataDescription), cardState: \(cardState.cardNumber)")
         
