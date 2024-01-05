@@ -21,7 +21,7 @@ cd "checkout-examples-ios/Co-Badged Cards/SwiftUI"
 3. Open the project
 
 ```sh
-open Package.swift
+open "Co-Badged Cards Example.xcodeproj"
 ```
 
 4. Run the project from Xcode 🚀
