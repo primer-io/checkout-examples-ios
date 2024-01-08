@@ -17,6 +17,8 @@ struct CardDetailsFormView: View {
     
     @State var isMakingPayment: Bool = false
     
+    @State var selectedCardNetworkIndex: Int? = nil
+    
     var body: some View {
         VStack(spacing: 4) {
             HStack(alignment: .bottom, spacing: 4) {
@@ -28,11 +30,12 @@ struct CardDetailsFormView: View {
                     errorMessage: $errors.cardNumber
                 )
                 if model.shouldDisplayCardSelectionView {
-                    CardSelectionView(cards: $model.cardNetworkModels)
-                        .frame(height: 45)
-                        // Align with text field - account for border (1)
-                        .padding(.bottom, errors.cardNumber.isEmpty ? 1 : 19)
-                        .padding(.trailing, 8)
+                    CardSelectionView(cards: $model.cardNetworkModels) { index in
+                    }
+                    .frame(height: 45)
+                    // Align with text field - account for border (1)
+                    .padding(.bottom, errors.cardNumber.isEmpty ? 1 : 19)
+                    .padding(.trailing, 8)
                 }
             }
             HStack(spacing: 0) {

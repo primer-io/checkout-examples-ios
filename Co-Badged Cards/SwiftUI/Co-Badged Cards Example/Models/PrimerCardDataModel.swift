@@ -20,7 +20,7 @@ class PrimerBaseCardDataModel: ObservableObject {
     
     @Published var cardholderName: String = ""
     
-    @Published var selectedCardNetwork: String = ""
+    @Published var selectedCardNetwork: CardNetwork = .unknown
     
     var isCardNumberFormatted: Bool {
         return (try? /(?:\d{4}+\s)*(?:\d{0,4})?/.wholeMatch(in: cardNumber)) != nil
@@ -42,6 +42,10 @@ class PrimerCardDataModel: PrimerBaseCardDataModel {
     }
     
     weak var service: PrimerDataService?
+    
+    func selectCardNetwork(at index: Int) {
+        selectedCardNetwork = cardNetworkModels[index].value
+    }
     
     override init() {
         super.init()
@@ -73,7 +77,7 @@ class PrimerCardDataErrorsModel: PrimerBaseCardDataModel {
         self.expiryDate = ""
         self.cvvNumber = ""
         self.cardholderName = ""
-        self.selectedCardNetwork = ""
+        self.selectedCardNetwork = .unknown
     }
 }
 
