@@ -114,7 +114,7 @@ class PrimerDataService: NSObject {
             expiryDate: model.expiryDate,
             cvv: model.cvvNumber,
             cardholderName: model.cardholderName,
-            cardNetworkIdentifier: model.selectedCardNetwork.isEmpty ? nil : model.selectedCardNetwork // JN TODO: move logic to SDK? Pretty sure
+            cardNetwork: model.selectedCardNetwork == .unknown ? nil : model.selectedCardNetwork
         )
     }
     
@@ -206,7 +206,10 @@ extension PrimerDataService: PrimerHeadlessUniversalCheckoutRawDataManagerDelega
             .enumerated()
             .map { index, model in
                 // JN TODO: should be getting image from the asset manager
-                CardDisplayModel(index: index, name: model.displayName, image: mapImageName(model))
+                CardDisplayModel(index: index,
+                                 name: model.displayName,
+                                 image: mapImageName(model),
+                                 value: model.network)
             }
         modelsDelegate?.didReceiveCardModels(models: models)
     }

@@ -1,0 +1,43 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+  desc "Description of what the lane does"
+  lane :build_example_app do |options|
+
+    if !options[:scheme] || !options[:project_path]
+      UI.user_error!("Both 'scheme' and 'project_path' options must be provided.")
+      exit(1)
+    end
+
+    project_file_path = options[:project_path]
+    scheme = options[:scheme]
+
+    build_app(
+      project: project_file_path,
+      scheme: scheme,
+      sdk: "iphonesimulator",
+      configuration: "Debug",
+      destination: "generic/platform=iOS Simulator",
+      xcargs: "EXCLUDED_ARCHS[sdk=iphonesimulator*]=arm64",
+      export_method: "development",
+      skip_package_ipa: true,
+      skip_package_pkg: true,
+      skip_profile_detection: true
+    )
+  end
+end

@@ -6,11 +6,14 @@
 //
 
 import SwiftUI
+import PrimerSDK
 
 struct CardDisplayModel {
     let index: Int
     let name: String
     let image: String
+    
+    let value: CardNetwork
     
     var uiImage: UIImage {
         if let image = UIImage(named: image) {
@@ -50,6 +53,8 @@ struct CardSelectionView: View {
     
     @State var selectedIndex: Int = 0
     
+    let onChange: (Int?) -> Void
+    
     var body: some View {
         HStack(spacing: 4) {
             ForEach(cards, id: \.name) { card in
@@ -70,7 +75,7 @@ struct CardSelectionView: View {
 
 #Preview {
     CardSelectionView(cards: .constant([
-        CardDisplayModel(index: 0, name: "MasterCard", image: "MasterCard"),
-        CardDisplayModel(index: 1, name: "VISA", image: "Visa")
-    ]))
+        CardDisplayModel(index: 0, name: "MasterCard", image: "MasterCard", value: .masterCard),
+        CardDisplayModel(index: 1, name: "VISA", image: "Visa", value: .visa)
+    ])) { _ in }
 }
