@@ -17,7 +17,13 @@ struct CardDetailsFormView: View {
     
     @State var isMakingPayment: Bool = false
     
-    @State var selectedCardNetworkIndex: Int? = nil
+    @State var selectedCardNetworkIndex: Int? = nil {
+        didSet {
+            if let index = selectedCardNetworkIndex {
+                model.selectCardNetwork(at: index)
+            }
+        }
+    }
     
     var body: some View {
         VStack(spacing: 4) {
@@ -31,6 +37,7 @@ struct CardDetailsFormView: View {
                 )
                 if model.shouldDisplayCardSelectionView {
                     CardSelectionView(cards: $model.cardNetworkModels) { index in
+                        selectedCardNetworkIndex = index
                     }
                     .frame(height: 45)
                     // Align with text field - account for border (1)

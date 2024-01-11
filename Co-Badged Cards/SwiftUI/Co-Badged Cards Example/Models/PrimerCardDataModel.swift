@@ -45,6 +45,7 @@ class PrimerCardDataModel: PrimerBaseCardDataModel {
     
     func selectCardNetwork(at index: Int) {
         selectedCardNetwork = cardNetworkModels[index].value
+        objectWillChange.send()
     }
     
     override init() {

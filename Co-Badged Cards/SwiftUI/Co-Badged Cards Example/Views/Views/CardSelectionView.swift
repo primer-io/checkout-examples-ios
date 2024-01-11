@@ -53,7 +53,7 @@ struct CardSelectionView: View {
     
     @State var selectedIndex: Int = 0
     
-    let onChange: (Int?) -> Void
+    let onChange: (Int) -> Void
     
     var body: some View {
         HStack(spacing: 4) {
@@ -70,6 +70,7 @@ struct CardSelectionView: View {
     
     func didTapCard(_ card: CardDisplayModel) {
         selectedIndex = card.index
+        onChange(selectedIndex)
     }
 }
 
