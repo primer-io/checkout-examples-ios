@@ -35,7 +35,7 @@ struct CardDetailsFormView: View {
                     text: $model.cardNumber,
                     errorMessage: $errors.cardNumber
                 )
-                if model.shouldDisplayCardSelectionView {
+//                if model.shouldDisplayCardSelectionView {
                     CardSelectionView(cards: $model.cardNetworkModels) { index in
                         selectedCardNetworkIndex = index
                     }
@@ -43,7 +43,7 @@ struct CardDetailsFormView: View {
                     // Align with text field - account for border (1)
                     .padding(.bottom, errors.cardNumber.isEmpty ? 1 : 19)
                     .padding(.trailing, 8)
-                }
+//                }
             }
             HStack(spacing: 0) {
                 PrimerTextField(
@@ -69,7 +69,7 @@ struct CardDetailsFormView: View {
             )
             
             VStack(spacing: 12) {
-                SupportedNetworksView()
+                AllowedNetworksView()
                 PrimerButton(action: onSubmit, labelText: "Pay")
             }
             .padding([.leading, .trailing], 6)

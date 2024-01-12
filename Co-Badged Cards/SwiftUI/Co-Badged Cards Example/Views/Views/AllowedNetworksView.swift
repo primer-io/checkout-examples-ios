@@ -1,5 +1,5 @@
 //
-//  SupportedNetworksView.swift
+//  AllowedNetworksView.swift
 //  Co-Badged Cards Example
 //
 //  Created by Jack Newcombe on 22/11/2023.
@@ -8,11 +8,11 @@
 import SwiftUI
 import PrimerSDK
 
-struct SupportedNetworksView: View {
+struct AllowedNetworksView: View {
     var body: some View {
         HStack {
             ForEach(assets, id: \.cardNetwork.rawValue) { asset in
-                if let image = asset.cardNetworkIcon.colored {
+                if let image = asset.cardImage {
                     Image(uiImage: image)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
@@ -27,7 +27,7 @@ struct SupportedNetworksView: View {
     
     var assets: [PrimerCardNetworkAsset] {
         do {
-            let assets = try PrimerHeadlessUniversalCheckout.AssetsManager.getSupportedCardNetworkAssets().values
+            let assets = try PrimerHeadlessUniversalCheckout.AssetsManager.getAllowedCardNetworkAssets()
             return Array(assets)
         } catch {
             logger.error("failed to get assets - \(error.localizedDescription)")
@@ -37,5 +37,5 @@ struct SupportedNetworksView: View {
 }
 
 #Preview {
-    SupportedNetworksView()
+    AllowedNetworksView()
 }

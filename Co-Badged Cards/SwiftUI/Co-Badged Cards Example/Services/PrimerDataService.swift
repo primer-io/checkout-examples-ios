@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 import PrimerSDK
 
 typealias RawDataManager = PrimerHeadlessUniversalCheckout.RawDataManager
@@ -199,26 +200,22 @@ extension PrimerDataService: PrimerHeadlessUniversalCheckoutRawDataManagerDelega
         }
         let metadataDescription = metadata.availableCardNetworks.map { $0.displayName }.joined(separator: ", ")
         logger.info("didReceiveCardMetadata: \(metadataDescription), cardState: \(cardState.cardNumber)")
-        
+    
         currentModels = metadata.availableCardNetworks
         let models = metadata.availableCardNetworks
             .filter { $0.displayName != "Unknown" }
             .enumerated()
             .map { index, model in
-                // JN TODO: should be getting image from the asset manager
                 CardDisplayModel(index: index,
                                  name: model.displayName,
-                                 image: mapImageName(model),
+                                 image: image(from: model),
                                  value: model.network)
             }
         modelsDelegate?.didReceiveCardModels(models: models)
     }
     
-    // JN TODO: should be getting this from the asset manager
-    private func mapImageName(_ model: PrimerCardNetwork) -> String {
-        if model.displayName == "Mastercard" {
-            return "MasterCard"
-        }
-        return model.displayName
+    private func image(from model: PrimerCardNetwork) -> UIImage? {
+        let asset = try? PrimerHeadlessUniversalCheckout.AssetsManager.getCardNetworkAsset(for: model.network)
+        return asset?.cardImage
     }
 }

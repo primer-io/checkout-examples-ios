@@ -11,12 +11,12 @@ import PrimerSDK
 struct CardDisplayModel {
     let index: Int
     let name: String
-    let image: String
+    let image: UIImage?
     
     let value: CardNetwork
     
     var uiImage: UIImage {
-        if let image = UIImage(named: image) {
+        if let image = image {
             return image
         } else {
             return UIImage(named: "UnknownCard")!
@@ -76,7 +76,7 @@ struct CardSelectionView: View {
 
 #Preview {
     CardSelectionView(cards: .constant([
-        CardDisplayModel(index: 0, name: "MasterCard", image: "MasterCard", value: .masterCard),
-        CardDisplayModel(index: 1, name: "VISA", image: "Visa", value: .visa)
+        CardDisplayModel(index: 0, name: "MasterCard", image: .init(), value: .masterCard),
+        CardDisplayModel(index: 1, name: "VISA", image: .init(), value: .visa)
     ])) { _ in }
 }
