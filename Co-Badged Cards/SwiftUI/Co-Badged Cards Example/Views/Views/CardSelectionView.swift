@@ -53,21 +53,28 @@ struct CardSelectionView: View {
     
     @State var selectedIndex: Int = 0
     
-    init(cards: Binding<[CardDisplayModel]>, onChange: @escaping (Int) -> Void) {
-        self._cards = cards
-        self.selectedIndex = 0
-        self.onChange = onChange
-    }
+    let isLoading: Bool
     
     let onChange: (Int) -> Void
-    
+
+    init(cards: Binding<[CardDisplayModel]>, isLoading: Bool, onChange: @escaping (Int) -> Void) {
+        self._cards = cards
+        self.selectedIndex = 0
+        self.isLoading = isLoading
+        self.onChange = onChange
+    }
+        
     var body: some View {
         HStack(spacing: 4) {
-            ForEach(cards, id: \.name) { card in
-                CardView(card: card)
-                    .opacity(cards.count == 1 || card.index == selectedIndex ? 1 : 0.5)
-                    .animation(.easeIn(duration: 0.1), value: selectedIndex)
-                    .onTapGesture { didTapCard(card) }
+            if isLoading {
+                ProgressView()
+            } else {
+                ForEach(cards, id: \.name) { card in
+                    CardView(card: card)
+                        .opacity(cards.count == 1 || card.index == selectedIndex ? 1 : 0.5)
+                        .animation(.easeIn(duration: 0.1), value: selectedIndex)
+                        .onTapGesture { didTapCard(card) }
+                }
             }
         }
         .frame(maxHeight: 32)
@@ -84,5 +91,5 @@ struct CardSelectionView: View {
     CardSelectionView(cards: .constant([
         CardDisplayModel(index: 0, name: "MasterCard", image: .init(), value: .masterCard),
         CardDisplayModel(index: 1, name: "VISA", image: .init(), value: .visa)
-    ])) { _ in }
+    ]), isLoading: false) { _ in }
 }

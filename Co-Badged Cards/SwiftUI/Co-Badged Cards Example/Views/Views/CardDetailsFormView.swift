@@ -36,7 +36,7 @@ struct CardDetailsFormView: View {
                     errorMessage: $errors.cardNumber
                 )
                 if model.shouldDisplayCardSelectionView {
-                    CardSelectionView(cards: $model.cardNetworkModels) { index in
+                    CardSelectionView(cards: $model.cardNetworkModels, isLoading: model.isLoading) { index in
                         selectedCardNetworkIndex = index
                     }
                     .frame(height: 45)

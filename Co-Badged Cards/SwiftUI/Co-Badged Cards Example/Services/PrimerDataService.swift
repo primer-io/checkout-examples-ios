@@ -19,6 +19,7 @@ protocol PrimerDataServiceErrorsDelegate {
 }
 
 protocol PrimerDataServiceModelsDelegate {
+    func willReceiveCardModels()
     func didReceiveCardModels(models: [CardDisplayModel])
     func didCompletePayment(payment: PaymentResultModel)
 }
@@ -186,6 +187,7 @@ extension PrimerDataService: PrimerHeadlessUniversalCheckoutRawDataManagerDelega
             return
         }
         logger.info("willFetchCardMetadataForState: \(state.cardNumber)")
+        modelsDelegate?.willReceiveCardModels()
         currentModels = nil
     }
     

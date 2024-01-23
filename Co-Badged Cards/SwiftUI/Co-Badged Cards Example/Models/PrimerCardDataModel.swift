@@ -31,6 +31,8 @@ class PrimerCardDataModel: PrimerBaseCardDataModel {
     
     var cancellables: Set<AnyCancellable> = []
     
+    @Published var isLoading: Bool = false
+    
     @Published var cardNetworkModels: [CardDisplayModel] = [] {
         didSet {
             selectedCardNetwork = .unknown
@@ -59,11 +61,17 @@ class PrimerCardDataModel: PrimerBaseCardDataModel {
 }
 
 extension PrimerCardDataModel: PrimerDataServiceModelsDelegate {
+    
     func didCompletePayment(payment: PaymentResultModel) {
-        
+        // JN TODO: Is this needed?
+    }
+    
+    func willReceiveCardModels() {
+        self.isLoading = true
     }
     
     func didReceiveCardModels(models: [CardDisplayModel]) {
+        self.isLoading = false
         DispatchQueue.main.async { [weak self] in
             if self?.cardNetworkModels.map({ $0.value.rawValue }) != models.map({ $0.value.rawValue }) {
                 self?.cardNetworkModels = models
