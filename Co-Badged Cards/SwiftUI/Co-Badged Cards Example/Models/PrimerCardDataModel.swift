@@ -33,6 +33,7 @@ class PrimerCardDataModel: PrimerBaseCardDataModel {
     
     @Published var cardNetworkModels: [CardDisplayModel] = [] {
         didSet {
+            selectedCardNetwork = .unknown
             objectWillChange.send()
         }
     }
@@ -64,7 +65,9 @@ extension PrimerCardDataModel: PrimerDataServiceModelsDelegate {
     
     func didReceiveCardModels(models: [CardDisplayModel]) {
         DispatchQueue.main.async { [weak self] in
-            self?.cardNetworkModels = models
+            if self?.cardNetworkModels.map({ $0.value.rawValue }) != models.map({ $0.value.rawValue }) {
+                self?.cardNetworkModels = models
+            }
         }
     }
 }
@@ -89,6 +92,8 @@ extension PrimerCardDataErrorsModel: PrimerDataServiceErrorsDelegate {
             switch error {
             case .invalidCardnumber(let message, _, _):
                 self.cardNumber = message
+            case .invalidCardType(let message, _, _):
+                self.cardNumber = message // Overrides above
             case .invalidExpiryDate(let message, _, _):
                 self.expiryDate = message
             case .invalidCvv(let message, _, _):

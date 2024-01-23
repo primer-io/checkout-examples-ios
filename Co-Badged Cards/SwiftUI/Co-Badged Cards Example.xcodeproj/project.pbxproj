@@ -25,11 +25,12 @@
 		04420E752B11005000EA8790 /* TextDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04420E742B11005000EA8790 /* TextDivider.swift */; };
 		04420E772B110DD100EA8790 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 04420E762B110DD100EA8790 /* Localizable.xcstrings */; };
 		04420E792B14A84500EA8790 /* ExampleAppLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04420E782B14A84500EA8790 /* ExampleAppLogger.swift */; };
+		044F26AE2B5995EE00CEFEBC /* PrimerSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 044F26AD2B5995EE00CEFEBC /* PrimerSDK */; };
 		0471BB072AFD1FFB000B286D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0471BB062AFD1FFB000B286D /* ContentView.swift */; };
 		0479FB1B2AF270B900D0AFC9 /* PrimerDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0479FB1A2AF270B900D0AFC9 /* PrimerDataService.swift */; };
-		049A69572B485EE20027E644 /* PrimerSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 049A69562B485EE20027E644 /* PrimerSDK */; };
 		04AFFEE72B02797A002B2019 /* StartPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFFEE62B02797A002B2019 /* StartPage.swift */; };
 		04D781562AF517BD00A3B29B /* ImageColorInverterModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D781552AF517BD00A3B29B /* ImageColorInverterModifier.swift */; };
+		04D79C5C2B59446500E6448E /* PrimerSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 04D79C5B2B59446500E6448E /* PrimerSDK */; };
 		04DAAECF2B03CA9F002E2614 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DAAECE2B03CA9F002E2614 /* SettingsModel.swift */; };
 		04DAAED12B03D148002E2614 /* StatusBarShim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DAAED02B03D148002E2614 /* StatusBarShim.swift */; };
 		04FAF9FA2AE81563002E4BAE /* ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FAF9F92AE81563002E4BAE /* ExampleApp.swift */; };
@@ -108,7 +109,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				049A69572B485EE20027E644 /* PrimerSDK in Frameworks */,
+				044F26AE2B5995EE00CEFEBC /* PrimerSDK in Frameworks */,
+				04D79C5C2B59446500E6448E /* PrimerSDK in Frameworks */,
 				04FAFA252AE816EF002E4BAE /* PrimerSDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -312,7 +314,8 @@
 			name = "Co-Badged Cards Example";
 			packageProductDependencies = (
 				04FAFA242AE816EF002E4BAE /* PrimerSDK */,
-				049A69562B485EE20027E644 /* PrimerSDK */,
+				04D79C5B2B59446500E6448E /* PrimerSDK */,
+				044F26AD2B5995EE00CEFEBC /* PrimerSDK */,
 			);
 			productName = "Co-Badged Cards Example";
 			productReference = 04FAF9F62AE81563002E4BAE /* Co-Badged Cards Example.app */;
@@ -387,7 +390,7 @@
 			);
 			mainGroup = 04FAF9ED2AE81563002E4BAE;
 			packageReferences = (
-				049A69552B485EE20027E644 /* XCRemoteSwiftPackageReference "primer-sdk-ios" */,
+				044F26AC2B5995EE00CEFEBC /* XCRemoteSwiftPackageReference "primer-sdk-ios" */,
 			);
 			productRefGroup = 04FAF9F72AE81563002E4BAE /* Products */;
 			projectDirPath = "";
@@ -692,6 +695,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N8UN9TR5DY;
@@ -712,6 +716,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N8UN9TR5DY;
@@ -805,20 +810,24 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		049A69552B485EE20027E644 /* XCRemoteSwiftPackageReference "primer-sdk-ios" */ = {
+		044F26AC2B5995EE00CEFEBC /* XCRemoteSwiftPackageReference "primer-sdk-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/primer-io/primer-sdk-ios.git";
 			requirement = {
-				branch = "feature/co-badged-cards";
+				branch = "jn/co-badged-cards/dx-align";
 				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		049A69562B485EE20027E644 /* PrimerSDK */ = {
+		044F26AD2B5995EE00CEFEBC /* PrimerSDK */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 049A69552B485EE20027E644 /* XCRemoteSwiftPackageReference "primer-sdk-ios" */;
+			package = 044F26AC2B5995EE00CEFEBC /* XCRemoteSwiftPackageReference "primer-sdk-ios" */;
+			productName = PrimerSDK;
+		};
+		04D79C5B2B59446500E6448E /* PrimerSDK */ = {
+			isa = XCSwiftPackageProductDependency;
 			productName = PrimerSDK;
 		};
 		04FAFA242AE816EF002E4BAE /* PrimerSDK */ = {

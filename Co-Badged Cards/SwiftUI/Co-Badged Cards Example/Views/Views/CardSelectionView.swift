@@ -53,13 +53,19 @@ struct CardSelectionView: View {
     
     @State var selectedIndex: Int = 0
     
+    init(cards: Binding<[CardDisplayModel]>, onChange: @escaping (Int) -> Void) {
+        self._cards = cards
+        self.selectedIndex = 0
+        self.onChange = onChange
+    }
+    
     let onChange: (Int) -> Void
     
     var body: some View {
         HStack(spacing: 4) {
             ForEach(cards, id: \.name) { card in
                 CardView(card: card)
-                    .opacity(card.index == selectedIndex ? 1 : 0.5)
+                    .opacity(cards.count == 1 || card.index == selectedIndex ? 1 : 0.5)
                     .animation(.easeIn(duration: 0.1), value: selectedIndex)
                     .onTapGesture { didTapCard(card) }
             }

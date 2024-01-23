@@ -193,16 +193,25 @@ extension PrimerDataService: PrimerHeadlessUniversalCheckoutRawDataManagerDelega
     func primerRawDataManager(_ rawDataManager: PrimerHeadlessUniversalCheckout.RawDataManager,
                               didReceiveMetadata metadata: PrimerPaymentMethodMetadata,
                               forState cardState: PrimerValidationState) {
+
         guard let metadata = metadata as? PrimerCardNumberEntryMetadata,
         let cardState = cardState as? PrimerCardNumberEntryState else {
             logger.error("Received non-card metadata. Ignoring ...")
             return
         }
-        let metadataDescription = metadata.availableCardNetworks.map { $0.displayName }.joined(separator: ", ")
-        logger.info("didReceiveCardMetadata: \(metadataDescription), cardState: \(cardState.cardNumber)")
+
+        let metadataDescription = metadata.selectableCardNetworks?.items.map { $0.displayName }.joined(separator: ", ") ?? "n/a"
+        logger.info("didReceiveCardMetadata: (selectable ->) \(metadataDescription), cardState: \(cardState.cardNumber)")
     
-        currentModels = metadata.availableCardNetworks
-        let models = metadata.availableCardNetworks
+        if metadata.source == .remote {
+            currentModels = metadata.selectableCardNetworks?.items
+        } else if let preferredDetectedNetwork = metadata.detectedCardNetworks.preferred {
+            currentModels = [preferredDetectedNetwork]
+        } else {
+            currentModels = []
+        }
+
+        let models = currentModels?
             .filter { $0.displayName != "Unknown" }
             .enumerated()
             .map { index, model in
@@ -211,7 +220,8 @@ extension PrimerDataService: PrimerHeadlessUniversalCheckoutRawDataManagerDelega
                                  image: image(from: model),
                                  value: model.network)
             }
-        modelsDelegate?.didReceiveCardModels(models: models)
+        
+        modelsDelegate?.didReceiveCardModels(models: models ?? [])
     }
     
     private func image(from model: PrimerCardNetwork) -> UIImage? {
