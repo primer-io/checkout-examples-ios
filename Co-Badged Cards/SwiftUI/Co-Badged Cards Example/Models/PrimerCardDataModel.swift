@@ -27,11 +27,15 @@ class PrimerBaseCardDataModel: ObservableObject {
     }
 }
 
+class PrimerLoadingModel: ObservableObject {
+    @Published var isLoading: Bool = false
+}
+
 class PrimerCardDataModel: PrimerBaseCardDataModel {
     
     var cancellables: Set<AnyCancellable> = []
-    
-    @Published var isLoading: Bool = false
+
+    var loadingModel: PrimerLoadingModel = PrimerLoadingModel()
     
     @Published var cardNetworkModels: [CardDisplayModel] = [] {
         didSet {
@@ -62,19 +66,18 @@ class PrimerCardDataModel: PrimerBaseCardDataModel {
 
 extension PrimerCardDataModel: PrimerDataServiceModelsDelegate {
     
-    func didCompletePayment(payment: PaymentResultModel) {
-        // JN TODO: Is this needed?
-    }
-    
     func willReceiveCardModels() {
-        self.isLoading = true
+        DispatchQueue.main.async {
+            self.loadingModel.isLoading = true
+        }
     }
     
     func didReceiveCardModels(models: [CardDisplayModel]) {
-        self.isLoading = false
         DispatchQueue.main.async { [weak self] in
-            if self?.cardNetworkModels.map({ $0.value.rawValue }) != models.map({ $0.value.rawValue }) {
-                self?.cardNetworkModels = models
+            guard let self = self else { return }
+            self.loadingModel.isLoading = false
+            if self.cardNetworkModels.map({ $0.value.rawValue }) != models.map({ $0.value.rawValue }) {
+                self.cardNetworkModels = models
             }
         }
     }
@@ -96,7 +99,7 @@ class PrimerCardDataErrorsModel: PrimerBaseCardDataModel {
 extension PrimerCardDataErrorsModel: PrimerDataServiceErrorsDelegate {
     func didReceiveErrors(errors: [Error]) {
         self.clearErrors()
-        errors.compactMap { $0 as? PrimerValidationError }.forEach { error in
+        errors.reversed().compactMap { $0 as? PrimerValidationError }.forEach { error in
             switch error {
             case .invalidCardnumber(let message, _, _):
                 self.cardNumber = message

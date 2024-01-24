@@ -12,6 +12,7 @@ struct CardDisplayModel {
     let index: Int
     let name: String
     let image: UIImage?
+    let isGrayedOut: Bool
     
     let value: CardNetwork
     
@@ -35,6 +36,7 @@ struct CardView: View {
             .frame(height: 32)
             .clipShape(clipShape)
             .overlay(border)
+            .grayscale(card.isGrayedOut ? 0.9995 : 0)
     }
     
     private var border: some View {
@@ -53,20 +55,20 @@ struct CardSelectionView: View {
     
     @State var selectedIndex: Int = 0
     
-    let isLoading: Bool
+    @StateObject var loadingModel: PrimerLoadingModel
     
     let onChange: (Int) -> Void
 
-    init(cards: Binding<[CardDisplayModel]>, isLoading: Bool, onChange: @escaping (Int) -> Void) {
+    init(cards: Binding<[CardDisplayModel]>, loadingModel: PrimerLoadingModel, onChange: @escaping (Int) -> Void) {
         self._cards = cards
         self.selectedIndex = 0
-        self.isLoading = isLoading
+        self._loadingModel = StateObject(wrappedValue: loadingModel)
         self.onChange = onChange
     }
         
     var body: some View {
         HStack(spacing: 4) {
-            if isLoading {
+            if loadingModel.isLoading {
                 ProgressView()
             } else {
                 ForEach(cards, id: \.name) { card in
@@ -89,7 +91,7 @@ struct CardSelectionView: View {
 
 #Preview {
     CardSelectionView(cards: .constant([
-        CardDisplayModel(index: 0, name: "MasterCard", image: .init(), value: .masterCard),
-        CardDisplayModel(index: 1, name: "VISA", image: .init(), value: .visa)
-    ]), isLoading: false) { _ in }
+        CardDisplayModel(index: 0, name: "MasterCard", image: .init(), isGrayedOut: false, value: .masterCard),
+        CardDisplayModel(index: 1, name: "VISA", image: .init(), isGrayedOut: false, value: .visa)
+    ]), loadingModel: .init()) { _ in }
 }

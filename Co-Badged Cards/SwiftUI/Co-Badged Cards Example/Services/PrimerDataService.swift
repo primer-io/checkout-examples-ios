@@ -21,7 +21,6 @@ protocol PrimerDataServiceErrorsDelegate {
 protocol PrimerDataServiceModelsDelegate {
     func willReceiveCardModels()
     func didReceiveCardModels(models: [CardDisplayModel])
-    func didCompletePayment(payment: PaymentResultModel)
 }
 
 @objc
@@ -195,20 +194,25 @@ extension PrimerDataService: PrimerHeadlessUniversalCheckoutRawDataManagerDelega
     func primerRawDataManager(_ rawDataManager: PrimerHeadlessUniversalCheckout.RawDataManager,
                               didReceiveMetadata metadata: PrimerPaymentMethodMetadata,
                               forState cardState: PrimerValidationState) {
-
+        
         guard let metadata = metadata as? PrimerCardNumberEntryMetadata,
-        let cardState = cardState as? PrimerCardNumberEntryState else {
+              let cardState = cardState as? PrimerCardNumberEntryState else {
             logger.error("Received non-card metadata. Ignoring ...")
             return
         }
-
+        
         let metadataDescription = metadata.selectableCardNetworks?.items.map { $0.displayName }.joined(separator: ", ") ?? "n/a"
         logger.info("didReceiveCardMetadata: (selectable ->) \(metadataDescription), cardState: \(cardState.cardNumber)")
-    
+        
+        var isGrayScale = false
+        
         if metadata.source == .remote {
             currentModels = metadata.selectableCardNetworks?.items
         } else if let preferredDetectedNetwork = metadata.detectedCardNetworks.preferred {
             currentModels = [preferredDetectedNetwork]
+        } else if let cardNetwork = metadata.detectedCardNetworks.items.first {
+            currentModels = [cardNetwork]
+            isGrayScale = true
         } else {
             currentModels = []
         }
@@ -219,7 +223,8 @@ extension PrimerDataService: PrimerHeadlessUniversalCheckoutRawDataManagerDelega
             .map { index, model in
                 CardDisplayModel(index: index,
                                  name: model.displayName,
-                                 image: image(from: model),
+                                 image: image(from: model), 
+                                 isGrayedOut: isGrayScale,
                                  value: model.network)
             }
         
