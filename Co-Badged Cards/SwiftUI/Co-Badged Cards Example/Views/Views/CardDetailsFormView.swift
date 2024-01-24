@@ -69,7 +69,6 @@ struct CardDetailsFormView: View {
             )
             
             VStack(spacing: 12) {
-                AllowedNetworksView()
                 PrimerButton(action: onSubmit, labelText: "Pay")
             }
             .padding([.leading, .trailing], 6)

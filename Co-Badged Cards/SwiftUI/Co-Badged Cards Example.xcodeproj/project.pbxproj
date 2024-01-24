@@ -21,7 +21,6 @@
 		04345A442B209A30006B40CC /* ButtonProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04345A432B209A30006B40CC /* ButtonProgressView.swift */; };
 		04345A472B20DD0C006B40CC /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04345A462B20DD0C006B40CC /* Formatters.swift */; };
 		04345A4A2B21D6F1006B40CC /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04345A492B21D6F1006B40CC /* Appearance.swift */; };
-		04420E722B0E62A000EA8790 /* AllowedNetworksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04420E712B0E62A000EA8790 /* AllowedNetworksView.swift */; };
 		04420E752B11005000EA8790 /* TextDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04420E742B11005000EA8790 /* TextDivider.swift */; };
 		04420E772B110DD100EA8790 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 04420E762B110DD100EA8790 /* Localizable.xcstrings */; };
 		04420E792B14A84500EA8790 /* ExampleAppLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04420E782B14A84500EA8790 /* ExampleAppLogger.swift */; };
@@ -79,7 +78,6 @@
 		04345A432B209A30006B40CC /* ButtonProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonProgressView.swift; sourceTree = "<group>"; };
 		04345A462B20DD0C006B40CC /* Formatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatters.swift; sourceTree = "<group>"; };
 		04345A492B21D6F1006B40CC /* Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
-		04420E712B0E62A000EA8790 /* AllowedNetworksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllowedNetworksView.swift; sourceTree = "<group>"; };
 		04420E742B11005000EA8790 /* TextDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextDivider.swift; sourceTree = "<group>"; };
 		04420E762B110DD100EA8790 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		04420E782B14A84500EA8790 /* ExampleAppLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleAppLogger.swift; sourceTree = "<group>"; };
@@ -182,7 +180,6 @@
 				04420E732B11003200EA8790 /* Layout */,
 				04FAFA2B2AE81D3D002E4BAE /* CardDetailsFormView.swift */,
 				042391082AF2B97A00833025 /* CardSelectionView.swift */,
-				04420E712B0E62A000EA8790 /* AllowedNetworksView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -453,7 +450,6 @@
 				0423910B2AF39D6100833025 /* CustomButtonStyle.swift in Sources */,
 				042391092AF2B97A00833025 /* CardSelectionView.swift in Sources */,
 				04FAF9FC2AE81563002E4BAE /* CardFormFullPageView.swift in Sources */,
-				04420E722B0E62A000EA8790 /* AllowedNetworksView.swift in Sources */,
 				04345A4A2B21D6F1006B40CC /* Appearance.swift in Sources */,
 				04FAFA2E2AE90049002E4BAE /* PrimerCardDataModel.swift in Sources */,
 				04345A3E2B1F8D0E006B40CC /* Font+Monospace.swift in Sources */,
