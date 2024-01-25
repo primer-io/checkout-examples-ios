@@ -46,8 +46,8 @@ struct StartPage: View {
                 }
                 .listRowBackground(isReadyForPaymentCreation ? Color.blue : Color.gray)
             }
-            .onAppear(perform: updateState)
-            .onChange(of: settingsModel.isConfiguredForMakingPayment, updateState)
+            .onAppear(perform: configureSDK)
+            .onChange(of: settingsModel.isConfiguredForMakingPayment, configureSDK)
         }
     }
     
@@ -59,7 +59,7 @@ struct StartPage: View {
         return sdkState == .ready && settingsModel.isConfiguredForMakingPayment
     }
     
-    func updateState() {
+    func configureSDK() {
         guard settingsModel.isConfiguredForMakingPayment else { return }
 
         Task {
@@ -76,7 +76,9 @@ struct StartPage: View {
             } catch {
                 sdkState = .error
                 logger.error(error.localizedDescription)
-                settingsModel.fetchErrorMessage = error.localizedDescription
+                settingsModel.fetchErrorMessage = """
+There was an error starting the SDK - check your configuration.
+"""
                 settingsModel.clientToken = ""
                 
                 switch (error as? PrimerDataService.Error) {

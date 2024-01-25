@@ -71,7 +71,11 @@ struct SettingsView: View {
             do {
                 settingsModel.clientToken = try await service.fetchClientToken(from: settingsModel.clientTokenUrl)
             } catch {
-                settingsModel.fetchErrorMessage = error.localizedDescription
+                settingsModel.fetchErrorMessage = """
+Could not fetch a client token from:
+POST \(settingsModel.clientTokenUrl)
+Make sure the server is running and that your network connection is working.
+"""
                 settingsModel.clientToken = ""
                 throw error
             }
