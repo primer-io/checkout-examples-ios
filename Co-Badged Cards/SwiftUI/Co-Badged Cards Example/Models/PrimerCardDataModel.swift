@@ -98,7 +98,6 @@ class PrimerCardDataErrorsModel: PrimerBaseCardDataModel {
 
 extension PrimerCardDataErrorsModel: PrimerDataServiceErrorsDelegate {
     func didReceiveErrors(errors: [Error]) {
-        print(">>>>> ERRORS count: \(errors.count)")
         self.clearErrors()
         errors.reversed().compactMap { $0 as? PrimerValidationError }.forEach { error in
             switch error {
