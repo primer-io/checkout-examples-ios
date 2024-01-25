@@ -12,7 +12,7 @@ To run the example app:
 git clone https://github.com/primer-io/checkout-examples-ios.git
 ```
 
-2. Change the directory into the repo
+2. Change directory into the repo
 
 ```sh
 cd "checkout-examples-ios/Co-Badged Cards/SwiftUI"
