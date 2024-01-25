@@ -16,7 +16,7 @@ struct ExampleApp: App {
     static var clientToken = ""
     
     // 👇 You can point to a server that provides the client token here
-    static var clientTokenUrl = "http://localhost:8000"
+    static var clientTokenUrl = "https://localhost:3000"
     
     let service = PrimerDataService(clientToken: Self.clientToken)
         

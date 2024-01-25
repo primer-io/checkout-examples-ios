@@ -110,12 +110,23 @@ class PrimerDataService: NSObject {
     }
     
     func update(withModel model: PrimerCardDataModel) {
+        let network = model.selectedCardNetwork == .unknown ? nil : model.selectedCardNetwork
+        
+        if let previousData = rawDataManager?.rawData as? PrimerCardData,
+            previousData.cardNumber == model.cardNumber &&
+            previousData.cardholderName == model.cardholderName &&
+            previousData.cvv == model.cvvNumber &&
+            previousData.expiryDate == model.expiryDate &&
+            previousData.cardNetwork == network {
+            return
+        }
+            
         rawDataManager?.rawData = PrimerCardData(
             cardNumber: model.cardNumber,
             expiryDate: model.expiryDate,
             cvv: model.cvvNumber,
             cardholderName: model.cardholderName,
-            cardNetwork: model.selectedCardNetwork == .unknown ? nil : model.selectedCardNetwork
+            cardNetwork: network
         )
     }
     
@@ -204,15 +215,15 @@ extension PrimerDataService: PrimerHeadlessUniversalCheckoutRawDataManagerDelega
         let metadataDescription = metadata.selectableCardNetworks?.items.map { $0.displayName }.joined(separator: ", ") ?? "n/a"
         logger.info("didReceiveCardMetadata: (selectable ->) \(metadataDescription), cardState: \(cardState.cardNumber)")
         
-        var isGrayScale = false
+        var isAllowed = true
         
-        if metadata.source == .remote {
+        if metadata.source == .remote, let networks = metadata.selectableCardNetworks?.items, !networks.isEmpty {
             currentModels = metadata.selectableCardNetworks?.items
         } else if let preferredDetectedNetwork = metadata.detectedCardNetworks.preferred {
             currentModels = [preferredDetectedNetwork]
         } else if let cardNetwork = metadata.detectedCardNetworks.items.first {
             currentModels = [cardNetwork]
-            isGrayScale = true
+            isAllowed = false
         } else {
             currentModels = []
         }
@@ -224,7 +235,7 @@ extension PrimerDataService: PrimerHeadlessUniversalCheckoutRawDataManagerDelega
                 CardDisplayModel(index: index,
                                  name: model.displayName,
                                  image: image(from: model), 
-                                 isGrayedOut: isGrayScale,
+                                 isAllowed: isAllowed,
                                  value: model.network)
             }
         

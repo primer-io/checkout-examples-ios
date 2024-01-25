@@ -28,7 +28,7 @@ class PrimerBaseCardDataModel: ObservableObject {
 }
 
 class PrimerLoadingModel: ObservableObject {
-    @Published var isLoading: Bool = false
+    var isLoading: Bool = false
 }
 
 class PrimerCardDataModel: PrimerBaseCardDataModel {
@@ -98,6 +98,7 @@ class PrimerCardDataErrorsModel: PrimerBaseCardDataModel {
 
 extension PrimerCardDataErrorsModel: PrimerDataServiceErrorsDelegate {
     func didReceiveErrors(errors: [Error]) {
+        print(">>>>> ERRORS count: \(errors.count)")
         self.clearErrors()
         errors.reversed().compactMap { $0 as? PrimerValidationError }.forEach { error in
             switch error {

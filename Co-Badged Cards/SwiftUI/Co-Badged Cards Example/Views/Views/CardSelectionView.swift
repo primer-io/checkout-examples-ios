@@ -12,7 +12,7 @@ struct CardDisplayModel {
     let index: Int
     let name: String
     let image: UIImage?
-    let isGrayedOut: Bool
+    let isAllowed: Bool
     
     let value: CardNetwork
     
@@ -36,7 +36,7 @@ struct CardView: View {
             .frame(height: 32)
             .clipShape(clipShape)
             .overlay(border)
-            .grayscale(card.isGrayedOut ? 0.9995 : 0)
+            .opacity(card.isAllowed ? 1 : 0.4)
     }
     
     private var border: some View {
@@ -91,7 +91,7 @@ struct CardSelectionView: View {
 
 #Preview {
     CardSelectionView(cards: .constant([
-        CardDisplayModel(index: 0, name: "MasterCard", image: .init(), isGrayedOut: false, value: .masterCard),
-        CardDisplayModel(index: 1, name: "VISA", image: .init(), isGrayedOut: false, value: .visa)
+        CardDisplayModel(index: 0, name: "MasterCard", image: .init(), isAllowed: true, value: .masterCard),
+        CardDisplayModel(index: 1, name: "VISA", image: .init(), isAllowed: true, value: .visa)
     ]), loadingModel: .init()) { _ in }
 }

@@ -12,7 +12,7 @@ struct CardFormFullPageView: View {
     
     let service: PrimerDataService
 
-    @StateObject var model: PrimerCardDataModel = .init()
+    var model: PrimerCardDataModel = .init()
     
     @StateObject var errorsModel: PrimerCardDataErrorsModel = .init()
     
