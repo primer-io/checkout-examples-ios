@@ -37,6 +37,7 @@ struct PrimerTextField: View {
                 .font(.caption)
                 .foregroundStyle(.blue)
             TextField(placeholder, value: text, formatter: formatter ?? EmptyFormatter())
+                .textFieldStyle(.plain)
             Rectangle()
                 .frame(height: 1)
                 .foregroundColor(.blue)
