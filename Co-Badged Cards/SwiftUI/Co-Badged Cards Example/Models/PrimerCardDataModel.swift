@@ -29,6 +29,7 @@ class PrimerBaseCardDataModel: ObservableObject {
 
 class PrimerLoadingModel: ObservableObject {
     var isLoading: Bool = false
+    @Published var isLoading: Bool = false
 }
 
 class PrimerCardDataModel: PrimerBaseCardDataModel {
