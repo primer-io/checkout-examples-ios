@@ -32,6 +32,7 @@ struct SettingsView: View {
             
             Section {
                 TextField(LocalizedStringKey("Settings.ClientTokenUrl.Placeholder"), text: $settingsModel.clientTokenUrl)
+                    .textCase(.lowercase)
                 Button {
                     onFetchClientToken()
                 } label: {
