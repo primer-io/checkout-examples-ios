@@ -27,6 +27,7 @@
 		044F26AE2B5995EE00CEFEBC /* PrimerSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 044F26AD2B5995EE00CEFEBC /* PrimerSDK */; };
 		0471BB072AFD1FFB000B286D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0471BB062AFD1FFB000B286D /* ContentView.swift */; };
 		0479FB1B2AF270B900D0AFC9 /* PrimerDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0479FB1A2AF270B900D0AFC9 /* PrimerDataService.swift */; };
+		04819DAD2B63A8D8004BBDE1 /* PrimerCardDataErrorsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04819DAC2B63A8D8004BBDE1 /* PrimerCardDataErrorsModel.swift */; };
 		04AFFEE72B02797A002B2019 /* StartPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFFEE62B02797A002B2019 /* StartPage.swift */; };
 		04D781562AF517BD00A3B29B /* ImageColorInverterModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D781552AF517BD00A3B29B /* ImageColorInverterModifier.swift */; };
 		04D79C5C2B59446500E6448E /* PrimerSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 04D79C5B2B59446500E6448E /* PrimerSDK */; };
@@ -83,6 +84,7 @@
 		04420E782B14A84500EA8790 /* ExampleAppLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleAppLogger.swift; sourceTree = "<group>"; };
 		0471BB062AFD1FFB000B286D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		0479FB1A2AF270B900D0AFC9 /* PrimerDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimerDataService.swift; sourceTree = "<group>"; };
+		04819DAC2B63A8D8004BBDE1 /* PrimerCardDataErrorsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimerCardDataErrorsModel.swift; sourceTree = "<group>"; };
 		04AFFEE62B02797A002B2019 /* StartPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartPage.swift; sourceTree = "<group>"; };
 		04D781552AF517BD00A3B29B /* ImageColorInverterModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageColorInverterModifier.swift; sourceTree = "<group>"; };
 		04DAAECE2B03CA9F002E2614 /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
@@ -278,8 +280,9 @@
 			isa = PBXGroup;
 			children = (
 				04FAFA2D2AE90049002E4BAE /* PrimerCardDataModel.swift */,
-				04DAAECE2B03CA9F002E2614 /* SettingsModel.swift */,
+				04819DAC2B63A8D8004BBDE1 /* PrimerCardDataErrorsModel.swift */,
 				04345A392B1F865C006B40CC /* PaymentResultModel.swift */,
+				04DAAECE2B03CA9F002E2614 /* SettingsModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -453,6 +456,7 @@
 				04345A4A2B21D6F1006B40CC /* Appearance.swift in Sources */,
 				04FAFA2E2AE90049002E4BAE /* PrimerCardDataModel.swift in Sources */,
 				04345A3E2B1F8D0E006B40CC /* Font+Monospace.swift in Sources */,
+				04819DAD2B63A8D8004BBDE1 /* PrimerCardDataErrorsModel.swift in Sources */,
 				040050C22AFE5CEB001843CA /* SettingsView.swift in Sources */,
 				04FAFA2A2AE81850002E4BAE /* PrimerTextField.swift in Sources */,
 				04345A402B208046006B40CC /* FormInfo.swift in Sources */,

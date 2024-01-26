@@ -59,7 +59,7 @@ class SettingsModel: ObservableObject {
         let components = token.components(separatedBy: ".")
         
         guard components.count == 3 else {
-            return false // JWT should have three parts
+            return false
         }
         
         return components.allSatisfy { (try? /[\w\d=\+\-\/]+/.wholeMatch(in: $0)) != nil }

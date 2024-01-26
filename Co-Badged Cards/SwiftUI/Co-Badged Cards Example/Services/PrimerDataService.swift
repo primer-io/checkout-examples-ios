@@ -59,6 +59,8 @@ class PrimerDataService: NSObject {
         self.clientToken = clientToken
     }
     
+    // MARK: SDK Configuration
+    
     func fetchClientToken(from url: String) async throws -> String {
         do {
             var request = URLRequest(url: URL(string: "\(url)/client-session")!)
