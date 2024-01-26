@@ -69,6 +69,13 @@ class PrimerCardDataModel: PrimerBaseCardDataModel {
             }
         }.store(in: &cancellables)
     }
+    
+    var isEmpty: Bool {
+        cardNumber.isEmpty &&
+        expiryDate.isEmpty &&
+        cvvNumber.isEmpty &&
+        cardholderName.isEmpty
+    }
 }
 
 extension PrimerCardDataModel: PrimerDataServiceModelsDelegate {

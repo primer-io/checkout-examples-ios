@@ -69,7 +69,11 @@ struct CardDetailsFormView: View {
             )
             
             VStack(spacing: 12) {
-                PrimerButton(action: onSubmit, labelText: "Pay")
+                PrimerButton(
+                    action: onSubmit,
+                    labelText: "Pay",
+                    isEnabled: !errors.hasErrors && !model.isEmpty
+                )
             }
             .padding([.leading, .trailing], 6)
         }

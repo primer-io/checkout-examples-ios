@@ -22,6 +22,15 @@ class PrimerCardDataErrorsModel: PrimerBaseCardDataModel {
         self.cardholderName = ""
         self.selectedCardNetwork = .unknown
     }
+    
+    var hasErrors: Bool {
+        !(
+            cardNumber.isEmpty &&
+            expiryDate.isEmpty &&
+            cvvNumber.isEmpty &&
+            cardholderName.isEmpty
+        )
+    }
 }
 
 extension PrimerCardDataErrorsModel: PrimerDataServiceErrorsDelegate {
