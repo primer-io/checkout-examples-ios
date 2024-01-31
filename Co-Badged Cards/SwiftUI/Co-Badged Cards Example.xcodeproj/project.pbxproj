@@ -814,7 +814,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/primer-io/primer-sdk-ios.git";
 			requirement = {
-				branch = "jn/co-badged-cards/dx-align";
+				branch = "feature/co-badged-cards";
 				kind = branch;
 			};
 		};
