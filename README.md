@@ -1,9 +1,9 @@
-# Checkout Examples for Primer iOS SDK
+![Primer Banner](./images/primer-banner.png)
 
-This repo contains examples of how to try out and how to integrate Primer's iOS SDK.
+# 💳 Checkout Example for Primer iOS SDK
 
-Each example is focused on one aspect of the integration path. 
+This repository contains examples of how to integrate [Primer's iOS SDK](https://primer.io/docs/sdk/ios/2.x.x/).
 
 | Example | Description |
 | ------- | ----------- |
-| 💳 [Co-Badged Cards](/Co-Badged%20Cards) | This example demonstrates how to integrate co-badged card support if you are offering support to your customers for a relevant network, such as Cartes Bancaires |
+| [Co-Badged Cards on Headless Checkout](/Co-Badged%20Cards) | This example demonstrates how to integrate a simple card form using Headless Checkout that handles co-badged cards. |

@@ -26,18 +26,21 @@ open "Co-Badged Cards Example.xcodeproj"
 
 4. Run the project from Xcode 🚀
 
+----
+
+This project requires a server to communicate with Primer's API. To get started quickly, we encourage you to use the [companion backend](https://github.com/primer-io/example-backend).
+
 ## Trying it out
 
 This example app allows you to:
 
-- Generate a client token (requires local server, see here TODO)
+- Generate a client token
 - Make a payment using a card
 - Select a co-badged network when making a payment with a co-badged card
 
 We support several test cards for different test cases, which you can find in our docs:
 
 📄 **[Primer Payments Testing](https://primer.io/docs/payments/testing)**
-
 
 ## Understanding the integration
 
