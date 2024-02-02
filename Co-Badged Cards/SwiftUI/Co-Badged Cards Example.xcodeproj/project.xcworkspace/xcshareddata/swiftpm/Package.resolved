@@ -1,21 +1,12 @@
 {
   "pins" : [
     {
-      "identity" : "primer-klarna-sdk-ios",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/primer-io/primer-klarna-sdk-ios.git",
-      "state" : {
-        "revision" : "146d9ae8f7accc1ad7b64b2a455106d54914edef",
-        "version" : "1.1.0"
-      }
-    },
-    {
       "identity" : "primer-sdk-ios",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/primer-io/primer-sdk-ios.git",
       "state" : {
         "branch" : "feature/co-badged-cards",
-        "revision" : "30f1da60e9ff0553303a7884311e868999d96e97"
+        "revision" : "c64d97de8c02b36d19ed9baafbe66bfc610b44fd"
       }
     }
   ],
