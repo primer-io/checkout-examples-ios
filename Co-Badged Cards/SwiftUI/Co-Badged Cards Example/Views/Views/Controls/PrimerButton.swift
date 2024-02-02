@@ -13,6 +13,8 @@ struct PrimerButton: View {
     
     let labelText: String
     
+    let isEnabled: Bool
+    
     @State var isWaitingForActionToComplete: Bool = false
     
     var body: some View {
@@ -31,6 +33,6 @@ struct PrimerButton: View {
             }
         }
         .primerButtonStyle()
-        .disabled(isWaitingForActionToComplete)
+        .disabled(isWaitingForActionToComplete || !isEnabled)
     }
 }

@@ -59,6 +59,8 @@ class PrimerDataService: NSObject {
         self.clientToken = clientToken
     }
     
+    // MARK: SDK Configuration
+    
     func fetchClientToken(from url: String) async throws -> String {
         do {
             var request = URLRequest(url: URL(string: "\(url)/client-session")!)
@@ -111,16 +113,7 @@ class PrimerDataService: NSObject {
     
     func update(withModel model: PrimerCardDataModel) {
         let network = model.selectedCardNetwork == .unknown ? nil : model.selectedCardNetwork
-        
-        if let previousData = rawDataManager?.rawData as? PrimerCardData,
-            previousData.cardNumber == model.cardNumber &&
-            previousData.cardholderName == model.cardholderName &&
-            previousData.cvv == model.cvvNumber &&
-            previousData.expiryDate == model.expiryDate &&
-            previousData.cardNetwork == network {
-            return
-        }
-            
+                    
         rawDataManager?.rawData = PrimerCardData(
             cardNumber: model.cardNumber,
             expiryDate: model.expiryDate,
@@ -243,7 +236,7 @@ extension PrimerDataService: PrimerHeadlessUniversalCheckoutRawDataManagerDelega
     }
     
     private func image(from model: PrimerCardNetwork) -> UIImage? {
-        let asset = try? PrimerHeadlessUniversalCheckout.AssetsManager.getCardNetworkAsset(for: model.network)
+        let asset = PrimerHeadlessUniversalCheckout.AssetsManager.getCardNetworkAsset(for: model.network)
         return asset?.cardImage
     }
 }

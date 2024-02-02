@@ -36,7 +36,7 @@ struct CardDetailsFormView: View {
                     errorMessage: $errors.cardNumber
                 )
                 if model.shouldDisplayCardSelectionView {
-                    CardSelectionView(cards: $model.cardNetworkModels, loadingModel: model.loadingModel) { index in
+                    CardSelectionView(cards: $model.cardNetworksModel.cardNetworks, loadingModel: model.loadingModel) { index in
                         selectedCardNetworkIndex = index
                     }
                     .frame(height: 45)
@@ -69,7 +69,11 @@ struct CardDetailsFormView: View {
             )
             
             VStack(spacing: 12) {
-                PrimerButton(action: onSubmit, labelText: "Pay")
+                PrimerButton(
+                    action: onSubmit,
+                    labelText: "Pay",
+                    isEnabled: !errors.hasErrors && !model.isEmpty
+                )
             }
             .padding([.leading, .trailing], 6)
         }
