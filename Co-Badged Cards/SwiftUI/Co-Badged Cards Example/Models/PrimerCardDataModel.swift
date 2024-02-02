@@ -52,7 +52,9 @@ class PrimerCardDataModel: PrimerBaseCardDataModel {
     
     func updateCardNetworks(with networks: [CardDisplayModel]) {
         cardNetworksModel.cardNetworks = networks
-        selectedCardNetwork = .unknown
+        if !networks.isEmpty {
+            selectCardNetwork(at: 0)
+        }
     }
     
     func selectCardNetwork(at index: Int) {
