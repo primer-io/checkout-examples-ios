@@ -73,10 +73,7 @@ class PrimerCardDataModel: PrimerBaseCardDataModel {
     }
     
     var isEmpty: Bool {
-        cardNumber.isEmpty &&
-        expiryDate.isEmpty &&
-        cvvNumber.isEmpty &&
-        cardholderName.isEmpty
+        [cardNumber, expiryDate, cvvNumber, cardholderName].allSatisfy { $0.isEmpty }
     }
 }
 

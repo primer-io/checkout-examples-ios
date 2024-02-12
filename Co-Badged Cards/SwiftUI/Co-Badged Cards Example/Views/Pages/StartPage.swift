@@ -71,7 +71,7 @@ struct StartPage: View {
                     settingsModel.clientToken = try await service.fetchClientToken(from: settingsModel.clientTokenUrl)
                 }
                 try await service.start()
-                await service.configureForPayments()
+                service.configureForPayments()
                 sdkState = .ready
             } catch {
                 sdkState = .error

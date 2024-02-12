@@ -91,23 +91,19 @@ class PrimerDataService: NSObject {
         }
     }
     
-    func configureForPayments() async {
-        await withCheckedContinuation { continuation in
-            guard let cardPaymentMethod = paymentMethods?.first(where: { $0.paymentMethodType == cardPaymentMethodName }) else {
-                logger.error("Failed to find card payment method")
-                continuation.resume()
-                return
-            }
-            
-            do {
-                rawDataManager = try RawDataManager(paymentMethodType: cardPaymentMethod.paymentMethodType)
-                rawDataManager?.delegate = self
-                logger.info("Successfully set up RawDataManager ✔")
-            }
-            catch {
-                logError(error)
-            }
-            continuation.resume()
+    func configureForPayments() {
+        guard let cardPaymentMethod = paymentMethods?.first(where: { $0.paymentMethodType == cardPaymentMethodName }) else {
+            logger.error("Failed to find card payment method")
+            return
+        }
+
+        do {
+            rawDataManager = try RawDataManager(paymentMethodType: cardPaymentMethod.paymentMethodType)
+            rawDataManager?.delegate = self
+            logger.info("Successfully set up RawDataManager ✔")
+        }
+        catch {
+            logError(error)
         }
     }
     
