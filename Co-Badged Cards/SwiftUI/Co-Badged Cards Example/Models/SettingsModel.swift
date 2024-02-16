@@ -15,11 +15,7 @@ class SettingsModel: ObservableObject {
         case clientTokenUrl = "CLIENT_TOKEN_URL"
     }
     
-    @Published var clientToken: String = "" {
-        didSet {
-            UserDefaults.standard.setValue(clientToken, forKey: Key.clientToken.rawValue)
-        }
-    }
+    @Published var clientToken: String = ""
     
     @Published var clientTokenUrl: String = "" {
         didSet {
