@@ -29,11 +29,6 @@ class PrimerDataService: NSObject {
     typealias ErrorsDelegate = PrimerDataServiceErrorsDelegate
     typealias ModelsDelegate = PrimerDataServiceModelsDelegate
     
-    struct ClientTokenRequestModel: Encodable {
-        let currencyCode: String
-        let amount: Int
-    }
-    
     struct ClientTokenModel: Decodable {
         let clientToken: String
     }
@@ -64,8 +59,6 @@ class PrimerDataService: NSObject {
     func fetchClientToken(from url: String) async throws -> String {
         do {
             var request = URLRequest(url: URL(string: "\(url)/client-session")!)
-            request.httpBody = try JSONEncoder().encode(ClientTokenRequestModel(currencyCode: "GBP", amount: 4999))
-            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
             request.httpMethod = "POST"
 
             let (data, _) = try await URLSession.shared.data(for: request)
