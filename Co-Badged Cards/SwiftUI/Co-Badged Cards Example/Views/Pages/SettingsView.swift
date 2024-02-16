@@ -14,7 +14,7 @@ struct SettingsView: View {
     @StateObject var settingsModel: SettingsModel
     
     @State var isFetchingClientToken: Bool = false
-        
+
     var body: some View {
         Group {
             Section {
@@ -31,7 +31,11 @@ struct SettingsView: View {
             }
             
             Section {
-                TextField(LocalizedStringKey("Settings.ClientTokenUrl.Placeholder"), text: $settingsModel.clientTokenUrl)
+                TextField(
+                    "",
+                    text: $settingsModel.clientTokenUrl,
+                    prompt: Text(verbatim: "https://my.glitch.server")
+                )
                     .keyboardType(.URL)
                     .textInputAutocapitalization(.never)
                 Button {
@@ -59,8 +63,15 @@ struct SettingsView: View {
                 }
             }
         }
+        .onAppear(perform: onAppear)
     }
-    
+
+    private func onAppear() {
+        if let _ = URL(string: settingsModel.clientTokenUrl) {
+            onFetchClientToken()
+        }
+    }
+
     private func onFetchClientToken() {
         Task {
             settingsModel.fetchErrorMessage = nil

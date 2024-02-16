@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "" : {
+
+    },
     "App.Title" : {
       "localizations" : {
         "en" : {
@@ -88,16 +91,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Client Token"
-          }
-        }
-      }
-    },
-    "Settings.ClientTokenUrl.Placeholder" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Client Token URL"
           }
         }
       }
