@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "primer-sdk-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/primer-io/primer-sdk-ios.git",
+      "state" : {
+        "branch" : "feature/co-badged-cards",
+        "revision" : "c64d97de8c02b36d19ed9baafbe66bfc610b44fd"
+      }
+    }
+  ],
+  "version" : 2
+}

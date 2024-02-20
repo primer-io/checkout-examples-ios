@@ -1,0 +1,40 @@
+name: Build Example Apps
+
+on: 
+  pull_request:
+    types:
+      - opened
+      - edited
+      - synchronize
+
+jobs:
+  build: 
+    name: "Build Example App"
+    runs-on: macos-13
+    strategy:
+      max-parallel: 2
+      matrix:
+        project: [
+          { scheme: 'Co-Badged Cards Example', path: 'Co-Badged Cards/SwiftUI/Co-Badged Cards Example.xcodeproj' }
+        ]
+    steps:
+      - name: Cancel previous jobs
+        uses: styfle/cancel-workflow-action@b173b6ec0100793626c2d9e6b90435061f4fc3e5
+
+        with:
+          access_token: ${{ github.token }}
+      - name: Git - Checkout
+        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744
+        with:
+          ref: ${{ github.ref }}
+      - name: Select Xcode Version
+        uses: maxim-lobanov/setup-xcode@60606e260d2fc5762a71e64e74b2174e8ea3c8bd
+        with:
+          xcode-version: '15.0'
+      - uses: ruby/setup-ruby@22fdc77bf4148f810455b226c90fb81b5cbc00a7
+        with:
+          ruby-version: "3.2"
+          bundler-cache: true
+      - name: Build with fastlane
+        run: |
+          bundle exec fastlane ios build_example_app "scheme:${{ matrix.project.scheme }}" "project_path:${{ matrix.project.path }}"
