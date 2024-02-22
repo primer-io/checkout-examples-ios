@@ -28,7 +28,7 @@ open "Co-Badged Cards Example.xcodeproj"
 
 ----
 
-This project requires a server to communicate with Primer's API. To get started quickly, we encourage you to use the [companion backend](https://github.com/primer-io/example-backend).
+This project requires a server to communicate with Primer's API. To get started quickly, we encourage you to use the [companion backend](https://github.com/primer-io/checkout-example-backend).
 
 ## Trying it out
 
