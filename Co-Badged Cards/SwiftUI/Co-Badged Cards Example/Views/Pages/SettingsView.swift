@@ -9,8 +9,6 @@ import SwiftUI
 
 struct SettingsView: View {
     
-    let service: PrimerDataService
-    
     @StateObject var settingsModel: SettingsModel
     
     @State var isFetchingClientToken: Bool = false
@@ -74,24 +72,10 @@ struct SettingsView: View {
 
     private func onFetchClientToken() {
         Task {
-            settingsModel.fetchErrorMessage = nil
             isFetchingClientToken = true
+            defer { isFetchingClientToken = false }
 
-            defer {
-                isFetchingClientToken = false
-            }
-
-            do {
-                settingsModel.clientToken = try await service.fetchClientToken(from: settingsModel.clientTokenUrl)
-            } catch {
-                settingsModel.fetchErrorMessage = """
-Could not fetch a client token from:
-POST \(settingsModel.clientTokenUrl)
-Make sure the server is running and that your network connection is working.
-"""
-                settingsModel.clientToken = ""
-                throw error
-            }
+            try await settingsModel.updateClientToken()
         }
     }
     
@@ -104,6 +88,6 @@ Make sure the server is running and that your network connection is working.
 
 #Preview {
     Form {
-        SettingsView(service: .init(clientToken: ""), settingsModel: .init())
+        SettingsView(settingsModel: .init(service: .init(clientToken: "")))
     }
 }

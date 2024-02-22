@@ -9,18 +9,15 @@ import SwiftUI
 
 struct ContentView: View {
     
-    let service: PrimerDataService
-    
-    @StateObject var settingsModel: SettingsModel = .init()
-            
+    @StateObject var settingsModel: SettingsModel
+
+    init(service: PrimerDataService) {
+        _settingsModel = StateObject(wrappedValue: SettingsModel(service:  service))
+    }
+
     var body: some View {
-        StartPage(service: service, settingsModel: settingsModel)
+        StartPage(settingsModel: settingsModel)
             .navigationTitle("App.Title")
             .navigationBarTitleDisplayMode(.inline)
-            .onReceive(settingsModel.$clientToken, perform: onReceive(clientToken:))
-    }
-    
-    func onReceive(clientToken: String) {
-        service.clientToken = clientToken
     }
 }
