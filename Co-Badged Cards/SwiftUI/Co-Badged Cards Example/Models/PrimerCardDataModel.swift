@@ -47,31 +47,39 @@ class PrimerCardDataModel: PrimerBaseCardDataModel {
     var shouldDisplayCardSelectionView: Bool {
         return !cardNumber.isEmpty && !cardNetworksModel.cardNetworks.isEmpty
     }
+
+    let service: PrimerDataService
+
+    init(service: PrimerDataService) {
+        self.service = service
+        super.init()
+        logger.info("[PrimerCardDataModel.init]")
+        objectWillChange.sink {
+            DispatchQueue.main.async {
+                self.service.update(withModel: self)
+            }
+        }.store(in: &cancellables)
+        service.modelsDelegate = self
+    }
     
-    weak var service: PrimerDataService?
-    
+    func makePayment(_ completion: @escaping (PaymentResultModel) -> Void) {
+        service.makePayment { result in
+            completion(result)
+        }
+    }
+
     func updateCardNetworks(with networks: [CardDisplayModel]) {
         cardNetworksModel.cardNetworks = networks
         if !networks.isEmpty {
             selectCardNetwork(at: 0)
         }
     }
-    
+
     func selectCardNetwork(at index: Int) {
         selectedCardNetwork = cardNetworksModel.cardNetworks[index].value
         objectWillChange.send()
     }
-    
-    override init() {
-        super.init()
-        logger.info("[PrimerCardDataModel.init]")
-        objectWillChange.sink {
-            DispatchQueue.main.async {
-                self.service?.update(withModel: self)
-            }
-        }.store(in: &cancellables)
-    }
-    
+
     var isEmpty: Bool {
         [cardNumber, expiryDate, cvvNumber, cardholderName].allSatisfy { $0.isEmpty }
     }

@@ -50,7 +50,8 @@ struct StartPage: View {
     }
     
     var fullPageView: some View {
-        CardFormFullPageView(service: settingsModel.service) // JN TODO
+        CardFormFullPageView(model: .init(service: settingsModel.service),
+                             errorsModel: .init(service: settingsModel.service))
     }
     
     var isReadyForPaymentCreation: Bool {

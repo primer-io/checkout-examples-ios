@@ -10,9 +10,10 @@ import PrimerSDK
 
 class PrimerCardDataErrorsModel: PrimerBaseCardDataModel {
     
-    override init() {
+    init(service: PrimerDataService) {
         super.init()
         logger.info("[PrimerCardDataErrorsModel.init]")
+        service.errorsDelegate = self
     }
     
     fileprivate func clearErrors() {
