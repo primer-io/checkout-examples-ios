@@ -59,11 +59,7 @@ class SettingsModel: ObservableObject {
             }
         } catch {
             DispatchQueue.main.sync {
-                fetchErrorMessage = """
-Could not fetch a client token from:
-POST \(clientTokenUrl)
-Make sure the server is running and that your network connection is working.
-"""
+                fetchErrorMessage = ErrorMessages.clientTokenFetch(clientTokenUrl: clientTokenUrl)
                 clientToken = ""
             }
             throw error
@@ -80,16 +76,11 @@ Make sure the server is running and that your network connection is working.
             service.configureForPayments()
         } catch {
             logger.error(error.localizedDescription)
-            fetchErrorMessage = """
-There was an error starting the SDK - check your configuration.
-"""
+            fetchErrorMessage = ErrorMessages.sdkStart
             clientToken = ""
 
-            switch (error as? PrimerDataService.Error) {
-            case .failedToFetchClientToken(let error),
-                    .failedToInitialiseSDK(let error):
-                logger.error(error.localizedDescription)
-            default: break
+            if let error = error as? PrimerDataService.Error {
+                logger.error(error.message)
             }
 
             throw error

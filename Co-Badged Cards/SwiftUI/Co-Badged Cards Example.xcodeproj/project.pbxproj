@@ -21,6 +21,7 @@
 		04345A442B209A30006B40CC /* ButtonProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04345A432B209A30006B40CC /* ButtonProgressView.swift */; };
 		04345A472B20DD0C006B40CC /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04345A462B20DD0C006B40CC /* Formatters.swift */; };
 		04345A4A2B21D6F1006B40CC /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04345A492B21D6F1006B40CC /* Appearance.swift */; };
+		043701CF2B88A9330019696B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043701CE2B88A9330019696B /* Constants.swift */; };
 		04420E752B11005000EA8790 /* TextDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04420E742B11005000EA8790 /* TextDivider.swift */; };
 		04420E772B110DD100EA8790 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 04420E762B110DD100EA8790 /* Localizable.xcstrings */; };
 		04420E792B14A84500EA8790 /* ExampleAppLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04420E782B14A84500EA8790 /* ExampleAppLogger.swift */; };
@@ -79,6 +80,7 @@
 		04345A432B209A30006B40CC /* ButtonProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonProgressView.swift; sourceTree = "<group>"; };
 		04345A462B20DD0C006B40CC /* Formatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatters.swift; sourceTree = "<group>"; };
 		04345A492B21D6F1006B40CC /* Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
+		043701CE2B88A9330019696B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		04420E742B11005000EA8790 /* TextDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextDivider.swift; sourceTree = "<group>"; };
 		04420E762B110DD100EA8790 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		04420E782B14A84500EA8790 /* ExampleAppLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleAppLogger.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 			children = (
 				04345A462B20DD0C006B40CC /* Formatters.swift */,
 				04345A492B21D6F1006B40CC /* Appearance.swift */,
+				043701CE2B88A9330019696B /* Constants.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -463,6 +466,7 @@
 				042391112AF3B17F00833025 /* LaunchScreenViewController.swift in Sources */,
 				04D781562AF517BD00A3B29B /* ImageColorInverterModifier.swift in Sources */,
 				04FAF9FA2AE81563002E4BAE /* ExampleApp.swift in Sources */,
+				043701CF2B88A9330019696B /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
