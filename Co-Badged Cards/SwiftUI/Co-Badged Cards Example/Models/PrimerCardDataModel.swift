@@ -53,7 +53,6 @@ class PrimerCardDataModel: PrimerBaseCardDataModel {
     init(service: PrimerDataService) {
         self.service = service
         super.init()
-        logger.info("[PrimerCardDataModel.init]")
         objectWillChange.sink {
             DispatchQueue.main.async {
                 self.service.update(withModel: self)

@@ -12,7 +12,6 @@ class PrimerCardDataErrorsModel: PrimerBaseCardDataModel {
     
     init(service: PrimerDataService) {
         super.init()
-        logger.info("[PrimerCardDataErrorsModel.init]")
         service.errorsDelegate = self
     }
     
