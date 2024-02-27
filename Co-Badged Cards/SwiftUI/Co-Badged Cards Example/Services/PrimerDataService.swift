@@ -37,6 +37,15 @@ class PrimerDataService: NSObject {
         case failedToFetchClientToken(error: Swift.Error)
         case failedToInitialiseSDK(error: Swift.Error)
         case paymentFailed(error: Swift.Error)
+
+        var message: String {
+            switch self {
+            case .failedToInitialiseSDK(let error),
+                    .failedToFetchClientToken(let error),
+                    .paymentFailed(let error):
+                return error.localizedDescription
+            }
+        }
     }
     
     var clientToken: String

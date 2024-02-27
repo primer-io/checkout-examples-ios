@@ -15,6 +15,8 @@ class SettingsModel: ObservableObject {
         case clientTokenUrl = "CLIENT_TOKEN_URL"
     }
     
+    let service: PrimerDataService
+
     @Published var clientToken: String = ""
     
     @Published var clientTokenUrl: String = "" {
@@ -27,7 +29,9 @@ class SettingsModel: ObservableObject {
     
     @Published var fetchErrorMessage: String? = nil
 
-    init() {
+    init(service: PrimerDataService) {
+        self.service = service
+        
         if let clientToken = UserDefaults.standard.string(forKey: Key.clientToken.rawValue) {
             self.clientToken = clientToken
         } else if !ExampleApp.clientToken.isEmpty {
@@ -38,13 +42,51 @@ class SettingsModel: ObservableObject {
         } else {
             self.clientTokenUrl = ExampleApp.clientTokenUrl
         }
-        
     }
     
     var isClientTokenValid: Bool {
         return !clientToken.isEmpty && isValidJWT(clientToken)
     }
-    
+
+    func updateClientToken() async throws {
+        DispatchQueue.main.sync {
+            fetchErrorMessage = nil
+        }
+        do {
+            let clientToken = try await service.fetchClientToken(from: clientTokenUrl)
+            DispatchQueue.main.sync {
+                self.clientToken = clientToken
+            }
+        } catch {
+            DispatchQueue.main.sync {
+                fetchErrorMessage = ErrorMessages.clientTokenFetch(clientTokenUrl: clientTokenUrl)
+                clientToken = ""
+            }
+            throw error
+        }
+    }
+
+    func setup() async throws {
+        if !isClientTokenValid {
+            try await updateClientToken()
+        }
+
+        do {
+            try await service.start()
+            service.configureForPayments()
+        } catch {
+            logger.error(error.localizedDescription)
+            fetchErrorMessage = ErrorMessages.sdkStart
+            clientToken = ""
+
+            if let error = error as? PrimerDataService.Error {
+                logger.error(error.message)
+            }
+
+            throw error
+        }
+    }
+
     // MARK: Helpers
     
     var isConfiguredForMakingPayment: Bool {

@@ -10,16 +10,19 @@ import Combine
 
 struct CardFormFullPageView: View {
     
-    let service: PrimerDataService
+    let model: PrimerCardDataModel
 
-    var model: PrimerCardDataModel = .init()
-    
-    @StateObject var errorsModel: PrimerCardDataErrorsModel = .init()
+    @StateObject var errorsModel: PrimerCardDataErrorsModel
     
     var cancellables: Set<AnyCancellable> = []
     
     @State var paymentModel: PaymentResultModel?
-    
+
+    init(model: PrimerCardDataModel, errorsModel: PrimerCardDataErrorsModel) {
+        self.model = model
+        self._errorsModel = StateObject(wrappedValue: errorsModel)
+    }
+
     var body: some View {
         VStack(spacing: 12) {
             Image("primer-icon")
@@ -36,13 +39,10 @@ struct CardFormFullPageView: View {
     }
     
     func onAppear() {
-        self.model.service = service
-        self.service.errorsDelegate = errorsModel
-        self.service.modelsDelegate = model
     }
     
     func onSubmit(_ completion: @escaping () -> Void) {
-        service.makePayment { result in
+        model.makePayment { result in
             self.paymentModel = result
             completion()
         }
@@ -51,7 +51,6 @@ struct CardFormFullPageView: View {
 }
 
 #Preview {
-    CardFormFullPageView(service: .init(clientToken: ""),
-                         model: .init(),
-                         errorsModel: .init())
+    CardFormFullPageView(model: .init(service: .init(clientToken: "")),
+                         errorsModel: .init(service: .init(clientToken: "")))
 }

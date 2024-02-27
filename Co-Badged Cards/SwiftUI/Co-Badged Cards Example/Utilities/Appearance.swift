@@ -8,7 +8,6 @@
 import UIKit
 
 final class Appearance {
-    
     static func setup() {
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
         UINavigationBar.appearance().tintColor = .white
@@ -17,5 +16,4 @@ final class Appearance {
         UINavigationBar.appearance().isTranslucent = false
         UIBarButtonItem.appearance().tintColor = .white
     }
-    
 }

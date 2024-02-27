@@ -81,5 +81,6 @@ struct CardDetailsFormView: View {
 }
 
 #Preview {
-    CardDetailsFormView(model: .init(), errors: .init()) { _ in }
+    CardDetailsFormView(model: .init(service: .init(clientToken: "")),
+                        errors: .init(service: .init(clientToken: ""))) { _ in }
 }

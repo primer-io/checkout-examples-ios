@@ -15,8 +15,6 @@ enum SDKState {
 }
 
 struct StartPage: View {
-
-    let service: PrimerDataService
     
     @StateObject var settingsModel: SettingsModel
 
@@ -30,7 +28,7 @@ struct StartPage: View {
                     Text(LocalizedStringKey("Start.Text.About")).font(.body).fontWeight(.light)
                 }
                 
-                SettingsView(service: service, settingsModel: settingsModel)
+                SettingsView(settingsModel: settingsModel)
                 
                 Section {
                     NavigationLink(destination: fullPageView) {
@@ -52,7 +50,8 @@ struct StartPage: View {
     }
     
     var fullPageView: some View {
-        CardFormFullPageView(service: service)
+        CardFormFullPageView(model: .init(service: settingsModel.service),
+                             errorsModel: .init(service: settingsModel.service))
     }
     
     var isReadyForPaymentCreation: Bool {
@@ -67,26 +66,10 @@ struct StartPage: View {
             settingsModel.fetchErrorMessage = nil
 
             do {
-                if !settingsModel.isClientTokenValid {
-                    settingsModel.clientToken = try await service.fetchClientToken(from: settingsModel.clientTokenUrl)
-                }
-                try await service.start()
-                service.configureForPayments()
+                try await settingsModel.setup()
                 sdkState = .ready
             } catch {
                 sdkState = .error
-                logger.error(error.localizedDescription)
-                settingsModel.fetchErrorMessage = """
-There was an error starting the SDK - check your configuration.
-"""
-                settingsModel.clientToken = ""
-                
-                switch (error as? PrimerDataService.Error) {
-                case .failedToFetchClientToken(let error),
-                        .failedToInitialiseSDK(let error):
-                    logger.error(error.localizedDescription)
-                default: break
-                }
             }
         }
     }
