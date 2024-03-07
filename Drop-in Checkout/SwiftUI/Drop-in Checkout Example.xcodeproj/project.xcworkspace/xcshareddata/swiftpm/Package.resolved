@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "primer-sdk-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/primer-io/primer-sdk-ios.git",
+      "state" : {
+        "revision" : "1c47e744c228057504a6bb3aa4d2279d4e5e0ff0",
+        "version" : "2.22.1"
+      }
+    }
+  ],
+  "version" : 2
+}

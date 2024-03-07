@@ -15,7 +15,8 @@ jobs:
       max-parallel: 2
       matrix:
         project: [
-          { scheme: 'Co-Badged Cards Example', path: 'Co-Badged Cards/SwiftUI/Co-Badged Cards Example.xcodeproj' }
+          { scheme: 'Co-Badged Cards Example', path: 'Co-Badged Cards/SwiftUI/Co-Badged Cards Example.xcodeproj' },
+          { scheme: 'Drop-in Checkout Example', path: 'Drop-in Checkout/SwiftUI/Drop-in Checkout Example.xcodeproj' }
         ]
     steps:
       - name: Cancel previous jobs
