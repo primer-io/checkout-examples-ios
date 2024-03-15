@@ -70,20 +70,6 @@ class SettingsModel: ObservableObject {
         if !isClientTokenValid {
             try await updateClientToken()
         }
-
-        do {
-            // TODO - needed?
-        } catch {
-            logger.error(error.localizedDescription)
-            fetchErrorMessage = ErrorMessages.sdkStart
-            clientToken = ""
-
-            if let error = error as? PrimerDataService.Error {
-                logger.error(error.message)
-            }
-
-            throw error
-        }
     }
 
     // MARK: Helpers
